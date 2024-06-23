@@ -1,27 +1,37 @@
-//  Нчальное состояние
+ //Нчальное состояние
 export const initialState = {
-    "field":    [
-        ['', '', ''],
-        ['', 'Y', ''],
-        ['', '', '']
+    "records":    [
+      
     ],
-    "isGameEnded":  false,
-    "isDraw":   false,
-    "currentPlayer":    'X'
+    "isRefreshRecords":  false,
+    "isUpdating":   false,
+    "stat":    false
 }; 
 
-export const reducerBeg = (state = initialState, action) => {
+export const reducerBeg = (state=initialState, action) => {
 
        
       const { type, payload } = action;
-    console.log('in reducerBeg');
-    console.log(`payload = ${payload}`);
+    console.log(`in reducerBeg isUpdating= ${state.isUpdating}`);
+   
+    
+   
+      console.log(`payload = ${payload}`);
+    
     //  Формирование нового state
   
     switch (type) {
       case 'LOAD_DATA':{
         console.log(`In reducer_beg LOAD_DATA payload = ${payload}`);
-        return state; 
+        console.log(`payload = ${payload[2].title}`);
+        
+        return {
+          ...state,
+          records: payload,
+          isRefreshRecords:  false,
+          isUpdating:   false,
+          stat:    false
+        }   
       }
 
      

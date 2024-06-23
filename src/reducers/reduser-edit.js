@@ -1,16 +1,5 @@
-//  Нчальное состояние
-export const initialState = {
-  "field":    [
-      ['', '', ''],
-      ['', '', ''],
-      ['', '', '']
-  ],
-  "isGameEnded":  false,
-  "isDraw":   false,
-  "currentPlayer":    'X'
-}; 
-
-
+//  Начальное состояние
+export const initialState = {};
 export const reducerEdit = (state=initialState, action) => {
 
        
@@ -22,12 +11,13 @@ export const reducerEdit = (state=initialState, action) => {
       case 'ADD_RECORD':{
         console.log(`In reducerEdit ADD_RECORD`);
         return state;
-        break;
+        
       }
 
      
     default: {
        console.log('in reducerEdit default');
+       
         return state;  
     
     }

@@ -1,27 +1,27 @@
-import { useState } from "react";
-import { useContext } from 'react';
-import { AppContext } from "../context";
 
 import { useRequestGetRecords } from "../hooks";
 import { useRequestDeleteRecord } from "../hooks";
+import { useState } from "react";
 
 import { Search } from "./search";
 import { AddRecord } from "./add-record";
 import { UpdateRecord } from "./update-record";
+import { useSelector } from "react-redux";
 
 export function MainPage (){
 
-  const { refreshRecords, refreshRec, title, setTitle, isUpdating, setIsUpdating, setStat } = useContext(AppContext);
+  // const { refreshRecords, refreshRec, title, setTitle, isUpdating, setIsUpdating, setStat } = useContext(AppContext);
 
     
-    const { isLoading, records, setRecords } = useRequestGetRecords(refreshRecords);
-    const { isDeleting, requestDeleteRecord} = useRequestDeleteRecord(refreshRec);
+    // const { isLoading, records, setRecords } = useRequestGetRecords(refreshRecords);
+    // const { isDeleting, requestDeleteRecord} = useRequestDeleteRecord(refreshRec);
     
+    let records = useSelector((state) => state.records);
+    let isLoading = false;
+
+     const [strSearch, setStrSearch] = useState('');
     
-    
-    const [strSearch, setStrSearch] = useState('');
-    
-    const [idRec, setIdRec] = useState('');
+    // const [idRec, setIdRec] = useState('');
 
     const requestSortRecords = () => {
       let arr = [...records];
@@ -33,14 +33,14 @@ export function MainPage (){
         return 0;
       });
       
-      setRecords(arr);
+      // setRecords(arr);
 
     };
 
     return (
         <div className="App">
           <Search strSearch={strSearch} setStrSearch={setStrSearch}/>
-          <AddRecord />
+          <AddRecord /> 
 
       <div className="button-panel">     
         <button 
@@ -48,7 +48,7 @@ export function MainPage (){
                   Сортировка
         </button>   
       </div>  
-        <UpdateRecord idRec={idRec}  />
+        {/* <UpdateRecord idRec={idRec}  /> */}
 
         <h1>To Do List</h1>
         
@@ -67,15 +67,15 @@ export function MainPage (){
                 
                   records.map(({ id, title, completed }) => (
                     
-                    <tr style= {title.indexOf(strSearch) >= 0 && strSearch !== '' ? {backgroundColor: "yellow"} : {backgroundColor: "#efefef"}}>                    
-                         
+                     <tr style= {title.indexOf(strSearch) >= 0 && strSearch !== '' ? {backgroundColor: "yellow"} : {backgroundColor: "#efefef"}}>                    
+                       
                       <td>{title}</td>  
-                      <button 
+                      {/* <button 
                         disabled={isDeleting} 
                         onClick={() => {requestDeleteRecord(id)}}>
                                 Удалить
-                      </button>
-                      <button
+                      </button> */}
+                      {/* <button
                         disabled={isUpdating}
                          onClick={() => {
                             setIsUpdating(true)
@@ -86,7 +86,7 @@ export function MainPage (){
                         }   
                         >
                         Изменить
-                      </button>
+                      </button> */}
                       
                     </tr>   
                   ))
