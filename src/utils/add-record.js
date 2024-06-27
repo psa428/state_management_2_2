@@ -8,17 +8,12 @@ export const addRecord = (title, dispatch) => {
         return;
     let isCreating = true;
     
-    fetchAddRecord(newRecord).then(() => {
-        console.log(`in addRecord dispatch`);
-            dispatch(getData());
-            
-            })
-        }
+    fetchAddRecord(newRecord, dispatch);
+
+};
 
 
-
-
-export  async function fetchAddRecord (newRecord) {   
+export  async function fetchAddRecord (newRecord, dispatch) {   
     fetch('http://localhost:3005/records', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json;charset=utf-8' },
@@ -29,7 +24,7 @@ export  async function fetchAddRecord (newRecord) {
     })
         .then((rawResponse) => rawResponse.json())
         .then((response) => {
-           
+            dispatch(getData());
         
         })
            
