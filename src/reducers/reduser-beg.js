@@ -63,7 +63,8 @@ export const reducerBeg = (state=initialState, action) => {
 
         return {
           ...state,
-          records: tmp
+          records: tmp,
+          isUpdating: false
         }
 
       }
